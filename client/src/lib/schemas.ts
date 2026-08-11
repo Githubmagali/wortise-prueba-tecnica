@@ -15,9 +15,6 @@ export const forgotPasswordFormSchema = z.object({
   email: z.string().trim().email('Ingresá un email válido'),
 })
 
-const resetPasswordSearchSchema = z.object({
-  token: z.string().catch(''),
-})
 
 export const articleFormSchema = z.object({
   title: z

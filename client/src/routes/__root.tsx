@@ -1,6 +1,5 @@
-import * as React from 'react'
 import { Outlet, createRootRoute, Link, useNavigate } from '@tanstack/react-router'
-import { authClient, useSession, signOut } from '@/lib/auth-client'
+import {  useSession, signOut } from '@/lib/auth-client'
 import { Power } from 'lucide-react'
 
 export const Route = createRootRoute({
