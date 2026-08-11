@@ -57,9 +57,10 @@ h3 {
   padding: 40px 24px;
 }
 
-.container-2 {
-  background-color: #fff;
 
+
+.container-3{
+ min-width: 31rem;
 }
 
 button,

@@ -20,7 +20,7 @@ function ForgotPasswordPage() {
       setFormError(null)
       const { error } = await requestPasswordReset({
         email: value.email,
-        redirectTo: '/reset-password',
+        redirectTo: `${window.location.origin}/reset-password`,
       })
       if (error) {
         setFormError(error.message || 'No se pudo procesar la solicitud.')
@@ -32,11 +32,11 @@ function ForgotPasswordPage() {
 
   return (
     <div className="flex justify-center pt-28">
-      <Card className="w-full max-w-sm ">
+      <Card className="w-full container-3">
         <div className="flex flex-col gap-1.5 pb-0">
           <h2 className="">Olvidé mi contraseña</h2>
           <p className="text-sm text-default-500">
-           Ingresá tu email y te mandamos un link para elegir una nueva contraseña.</p>
+          </p>
         </div>
         <Card.Content>
           {sent ? (

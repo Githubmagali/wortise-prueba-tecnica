@@ -11,7 +11,7 @@ const resetPasswordSearchSchema = z.object({
 
 const newPasswordSchema = z
   .string()
-  .min(8, 'La contraseña debe tener al menos 8 caracteres')
+  .min(7, 'La contraseña debe tener al menos 7 caracteres')
 
 export const Route = createFileRoute('/reset-password')({
   validateSearch: resetPasswordSearchSchema,
