@@ -8,6 +8,15 @@ Aplicación web para gestionar artículos: registro/login de usuarios, creación
 
 **Backend:** Hono (API), Better Auth (autenticación por email/contraseña), MongoDB con el driver nativo (sin ORM), validación con Zod.
 
+
+## Demo en producción
+
+- **Frontend:** https://wortise-prueba-tecnica.vercel.app/
+- **Backend (API):** https://wortise-prueba-tecnica-xd43.onrender.com
+
+> Nota: el backend está en el plan gratuito de Render, que "duerme" tras un rato de inactividad — la primera request después de un tiempo sin uso puede tardar hasta ~50 segundos en responder mientras el servidor se reactiva.
+
+
 ## Estructura del repositorio
 
 prueba-tecnica-blog-app/
@@ -42,7 +51,7 @@ BETTER_AUTH_SECRET= # cualquier string largo y random (podés generarlo con: ope
 BETTER_AUTH_URL=http://localhost:3001
 CORS_ORIGIN=http://localhost:5173
 PORT=3001
-
+RESEND_API_KEY= # necesaria solo para probar la recuperación de contraseña (ver sección "Adicionales" abajo)
 
 Levantar el servidor:
 
@@ -82,12 +91,27 @@ La app queda disponible en `http://localhost:5173`.
 3. Creá, editá y eliminá tus artículos desde `/articles`
 4. La home (`/`) es pública: cualquiera puede ver autores y buscar artículos sin necesidad de una cuenta.
 
+### Datos de prueba (seed)
+
+Para no tener que registrarte y crear artículos a mano, hay un script que carga usuarios y artículos de ejemplo:
+
+```bash
+cd server
+npm run seed
+```
+
+Esto crea 2 usuarios de prueba (contraseña `password123` para ambos) con artículos de ejemplo asociados. El script es seguro de correr varias veces — no duplica datos que ya existan.
+
 ## Decisiones técnicas
 
 - **Client-Side Rendering (sin SSR):** la aplicación es una SPA renderizada del lado del cliente. Esto implica limitaciones de SEO en la página pública, ya que el contenido no está presente en el HTML inicial. Se evaluó agregar SSR, pero se descartó por estar fuera del alcance de los requisitos técnicos pedidos (Vite + TanStack Router no incluyen SSR nativo; requeriría adoptar un framework distinto, como TanStack Start) y del plazo de la prueba.
 - **Validación de permisos en el servidor:** las operaciones de editar y eliminar un artículo verifican en el backend que el artículo pertenezca al usuario autenticado, más allá de que la interfaz ya oculte esos botones a quien no es el dueño.
 - **Búsqueda pública:** se implementa con `$regex` case-insensitive sobre título, contenido y nombre de autor, ejecutada del lado del servidor.
 - **Estado de búsqueda y paginación en la URL:** los parámetros `q` y `page` viven en la URL (vía search params de TanStack Router), no en estado local — así los resultados son compartibles y persisten al recargar la página.
+
+
+- **Cookies de sesión cross-domain:** como el frontend (Vercel) y el backend (Render) viven en dominios distintos, la cookie de sesión de Better Auth requiere `sameSite: "none"` y `secure: true` en producción (y `sameSite: "lax"` sin `secure` en desarrollo local, donde no se corre sobre HTTPS).
+- **Rewrites de SPA en Vercel:** se agregó un `vercel.json` con un rewrite a `index.html` para todas las rutas, ya que sin esto, entrar directo a una URL como `/login` (o recargarla) devuelve 404 — el servidor no sabe que esa ruta la maneja el JavaScript del lado del cliente.
 
 ## Uso de herramientas de IA
 
@@ -98,10 +122,18 @@ Utilicé **Claude (Anthropic)** durante toda la prueba, principalmente como guí
 - Revisar y sugerir mejoras de accesibilidad y responsive design.
 - Redactar este README.
 
+
+
+
 ## Adicionales implementados
 
-- Filtros de búsqueda reflejados en la URL (`?q=...&page=...`)
+- Filtros de búsqueda y paginación reflejados en la URL, con valores por defecto ocultos (`stripSearchParams`)
 - Estados de carga, vacío y error en todas las vistas
 - Paginación tanto en el listado privado como en la búsqueda pública
 - Diseño responsive (mobile/desktop)
+- Mejoras de accesibilidad: `alt` descriptivo en imágenes, `aria-label` en botones sin texto, `role="dialog"` en el modal de confirmación, `lang="es"` en el documento
+- Mejoras de SEO: meta tags dinámicos (título de pestaña por página), `sitemap.xml` y `robots.txt`, `loading="lazy"` en imágenes de las grillas
+- Mostrar/ocultar contraseña en los formularios de login, registro y cambio de contraseña
+- Seed de datos para facilitar la revisión (`npm run seed`)
+- Despliegue funcional (Vercel + Render) — links arriba
 - Recuperación de contraseña por email (con [Resend](https://resend.com)), aunque el enunciado aclara que no es un requisito — la agregué como práctica adicional. Para probarla hace falta una `RESEND_API_KEY`; te la comparto por separado (no la subo al repo por ser una credencial real), ya que no es necesaria para el resto de la funcionalidad.
