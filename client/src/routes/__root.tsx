@@ -55,6 +55,10 @@ function RootComponent() {
       <main className="p-4 flex-1 justify-center">
         <Outlet />
       </main>
+      <footer className="border-t border-default-200 px-4 sm:px-13 py-4 text-center text-sm text-default-500 flex items-center justify-center">
+        <div>© 2026 Artículos</div>
+        <a href="mailto:soporte@impulsanube.com" className='color-2 px-4'>Soporte</a>
+      </footer>
     </div>
   )
 }
