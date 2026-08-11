@@ -102,17 +102,26 @@ function HomePage() {
           </p>
         )}
         {searchQuery.data && searchQuery.data.items.length > 0 && (
-          <div className="flex flex-col gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {searchQuery.data.items.map((article) => (
               <Link
                 key={article.id}
                 to="/public/articles/$id"
                 params={{ id: article.id }}
-                className="container-2 border border-default-200 rounded-md p-4 hover:border-default-400"
+                className="border border-default-200 rounded-md overflow-hidden hover:border-default-400 flex flex-col"
               >
-                <h3 className="font-semibold">{article.title}</h3>
-                <p className="text-sm text-default-500">{article.authorName}</p>
-                <p className="text-sm text-default-500 line-clamp-1 pt-4">{article.content}</p>
+                {article.coverImageUrl && (
+                  <img
+                    src={article.coverImageUrl}
+                    alt={article.title}
+                    className="w-full h-40 object-cover"
+                  />
+                )}
+                <div className="p-4 flex flex-col gap-1">
+                  <h3 className="font-semibold title-1">{article.title}</h3>
+                  <p className="text-sm text-default-500">{article.authorName}</p>
+                  <p className="text-sm text-default-500 line-clamp-2 pt-2">{article.content}</p>
+                </div>
               </Link>
             ))}
           </div>

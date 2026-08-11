@@ -31,8 +31,8 @@ function ForgotPasswordPage() {
   })
 
   return (
-    <div className="flex justify-center p-8">
-      <Card className="w-full max-w-sm">
+    <div className="flex justify-center pt-28">
+      <Card className="w-full max-w-sm ">
         <div className="flex flex-col gap-1.5 pb-0">
           <h2 className="">Olvidé mi contraseña</h2>
           <p className="text-sm text-default-500">

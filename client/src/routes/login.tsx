@@ -30,8 +30,8 @@ function LoginPage() {
   })
 
   return (
-    <div className="flex justify-center p-8">
-      <Card className="w-full max-w-sm">
+    <div className="flex justify-center p-8 pt-28">
+      <Card className="w-full max-w-sm ">
         <div className="flex flex-col gap-1.5 pb-0">
           <h2 className="">Ingresar</h2>
           <p className="text-sm text-default-500">Accedé a tu cuenta para gestionar tus artículos.</p>

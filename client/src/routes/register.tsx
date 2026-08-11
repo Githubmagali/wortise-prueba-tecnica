@@ -31,7 +31,7 @@ function RegisterPage() {
     })
 
     return (
-        <div className="flex justify-center p-8">
+        <div className="flex justify-center p-8 pt-28">
             <Card className="w-full max-w-sm">
                 <div className="flex flex-col gap-1.5 pb-0">
                     <h2 className="">Crear cuenta</h2>
