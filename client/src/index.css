@@ -25,6 +25,7 @@ body,
 
 .color-3{
   color: #e61e62;
+  text-decoration: underline;
 }
 
 input,
