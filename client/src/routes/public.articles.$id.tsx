@@ -127,7 +127,7 @@ function PublicArticleDetailPage() {
 
       <div className="container max-w-3xl flex flex-col gap-4 mx-auto">
         {article.coverImageUrl && (
-          <img src={article.coverImageUrl} alt={article.coverImageUrl} loading="lazy" className="w-full max-h-96 object-cover rounded-md" />
+          <img src={article.coverImageUrl} alt={article.title} loading="lazy" className="w-full max-h-96 object-cover rounded-md" />
         )}
         <h1 className="font-semibold">{article.title}</h1>
         <p className="text-sm text-default-500">
