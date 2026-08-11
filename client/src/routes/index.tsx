@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
+import { createFileRoute, Link, useNavigate, stripSearchParams } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { Input, Chip } from '@heroui/react'
@@ -11,8 +11,13 @@ const searchParamsSchema = z.object({
   page: z.number().catch(1),
 })
 
+const defaultSearch = { q: '', page: 1 }
+
 export const Route = createFileRoute('/')({
   validateSearch: searchParamsSchema,
+  search: {
+    middlewares: [stripSearchParams(defaultSearch)],
+  },
   component: HomePage,
 })
 

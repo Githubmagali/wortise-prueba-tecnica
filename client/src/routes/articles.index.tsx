@@ -1,8 +1,10 @@
-import { createFileRoute, Link, useNavigate} from '@tanstack/react-router'
+import { createFileRoute, Link, useNavigate,  stripSearchParams } from '@tanstack/react-router'
 import { Button } from '@heroui/react'
 import { useQuery } from '@tanstack/react-query'
 import { api } from '@/lib/api'
 import { z } from 'zod'
+
+const defaultSearch = { page: 1 }
 
 const searchParamsSchema = z.object({
   page: z.number().catch(1),
@@ -10,6 +12,9 @@ const searchParamsSchema = z.object({
 
 export const Route = createFileRoute('/articles/')({
   validateSearch: searchParamsSchema,
+  search: {
+    middlewares: [stripSearchParams(defaultSearch)],
+  },
   component: MyArticlesPage,
 })
 
@@ -49,17 +54,27 @@ function MyArticlesPage() {
           <h1 className="text-2xl font-semibold flex ">Mis <div className="color-2 pl-2">artículos</div></h1>
           <Link to="/articles/new" className="underline">Nuevo artículo</Link>
         </div>
-        <div className="flex flex-col gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {data.items.map((article) => (
-            <Link
-              key={article.id}
-              to="/articles/$id"
-              params={{ id: article.id }}
-              className="container-2 border border-default-200 rounded-md p-4 hover:border-default-400"
-            >
-              <h2 className="font-semibold">{article.title}</h2>
-              <p className="text-sm text-default-500 line-clamp-1 pt-4">{article.content}</p>
-            </Link>
+             <Link
+                key={article.id}
+                to="/public/articles/$id"
+                params={{ id: article.id }}
+                className="border border-default-200 rounded-md overflow-hidden hover:border-default-400 flex flex-col"
+              >
+                {article.coverImageUrl && (
+                  <img
+                    src={article.coverImageUrl}
+                    alt={article.title}
+                    className="w-full h-40 object-cover"
+                  />
+                )}
+                <div className="p-4 flex flex-col gap-1 bg-white">
+                  <h3 className="font-semibold title-1">{article.title}</h3>
+                  <p className="text-sm text-default-500">{article.authorName}</p>
+                  <p className="text-sm text-default-500 pt-2">{article.content}</p>
+                </div>
+              </Link>
           ))}
         </div>
       </div>
