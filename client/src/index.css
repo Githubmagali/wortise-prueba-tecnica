@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+@import "@heroui/styles";
+
+html,
+body,
+#root {
+  height: 100%;
+  font-family: Manrope, sans-serif;
+  background: rgb(247 245 245);
+}
+
+.logo {
+  color: #e6467d;
+}
+
+.logo:hover {
+  color: #cd84b0;
+}
+
+.color-2 {
+  color: #cd84b0;
+}
+
+input,
+.card {
+  border-radius: 6px;
+  box-shadow: none;
+  border: 1px solid #060606;
+  background-color: #fff;
+
+}
+
+h1 {
+  font-size: 25px;
+  font-weight: 600;
+}
+ h2 {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+h3 {
+  font-size: 23px;
+  font-weight: 600;
+}
+
+
+.input-2 {
+  min-width: 300px;
+}
+
+.container {
+  background-color: #fff;
+  border: 1px solid #c5c5c5;
+  border-radius: 10px;
+  padding: 40px 24px;
+}
+
+.container-2 {
+  background-color: #fff;
+
+}
+
+button,
+.link-button {
+  color: black;
+  background: white;
+  border: 1px solid #c5c5c5;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.button-2 {
+  padding: 9px;
+  border-radius: 26px !important;
+  cursor: pointer;
+}
+
+button:hover,
+.link-button:hover {
+  color: white;
+  background: #730f31;
+  border: 1px solid #c5c5c5;
+}
+
+
+.link,
+a,
+.button {
+  font-size: 17px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.button-3 {
+  color: #00000080;
+  background-color: #ffaba059;
+  border: 1px dashed #878787;
+  border-radius: 9999px;
+  padding: 4px 24px;
+  font-size: 16px;
+}
+
+.button-3:hover{
+   background-color: #ffaba06e;
+   transition: fill 0.2s;
+}
+
+/* Login register */
+
+
+.card__description {
+  font-size: 16px;
+}
+
+.link-2 {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* articles.index */
+
+.img-articles {
+  max-width: 900px;
+  border-radius: 10px;
+}
+
+@media (max-width: 969px) {
+  .img-articles {
+    max-width: 358px;
+  }
+
+
+}
+
+@media (max-width: 969px) {
+  .button-3 {
+    padding: 8px 13px;
+    font-size: 14px;
+  }
+
+  /* Public.articles.edit */
+  .container-3 {
+    flex-direction: column;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+  h2 {
+    font-size: 17px;
+  }
+   h3 {
+    font-size: 16px;
+  }
+
+}
