@@ -27,7 +27,6 @@ function PublicArticleDetailPage() {
   }
 
   const article = data.item
- useDocumentTitle(`${article.title} · Artículos`)
   return (
   <div className="relative p-2 sm:p-8">
   <div className="flex flex-col gap-4 mb-6 lg:mb-0 lg:absolute lg:left-8 lg:top-8">
