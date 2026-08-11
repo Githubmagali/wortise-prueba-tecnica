@@ -4,12 +4,14 @@ import { useState } from 'react'
 import { Button, Card, Input, Label, TextField, FieldError } from '@heroui/react'
 import { registerFormSchema } from '@/lib/schemas'
 import { signUp } from '@/lib/auth-client'
+import { useDocumentTitle } from '@/lib/useDocumentTitle'
 
 export const Route = createFileRoute('/register')({
     component: RegisterPage,
 })
 
 function RegisterPage() {
+    useDocumentTitle('Registrarme · Artículos')
     const navigate = useNavigate()
     const [formError, setFormError] = useState<string | null>(null)
     const [showPassword, setShowPassword] = useState(false)
@@ -32,7 +34,7 @@ function RegisterPage() {
     })
 
     return (
-        <div className="flex justify-center p-8 pt-28">
+        <div className="flex justify-center p-2 sm:pt-28">
             <Card className="w-full max-w-sm">
                 <div className="flex flex-col gap-1.5 pb-0">
                     <h2 className="">Crear cuenta</h2>

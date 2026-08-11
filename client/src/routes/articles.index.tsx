@@ -3,6 +3,7 @@ import { Button } from '@heroui/react'
 import { useQuery } from '@tanstack/react-query'
 import { api } from '@/lib/api'
 import { z } from 'zod'
+import { useDocumentTitle } from '@/lib/useDocumentTitle'
 
 const defaultSearch = { page: 1 }
 
@@ -19,6 +20,7 @@ export const Route = createFileRoute('/articles/')({
 })
 
 function MyArticlesPage() {
+  useDocumentTitle('Mis artículos · Artículos')
   const { page } = Route.useSearch()
   const navigate = useNavigate({ from: Route.fullPath })
 

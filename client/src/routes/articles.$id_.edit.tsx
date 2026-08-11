@@ -5,12 +5,14 @@ import { useState } from 'react'
 import { Button, Card, Input, TextField, Label, FieldError } from '@heroui/react'
 import { articleFormSchema } from '@/lib/schemas'
 import { api, ApiError } from '@/lib/api'
+import { useDocumentTitle } from '@/lib/useDocumentTitle'
 
 export const Route = createFileRoute('/articles/$id_/edit')({
   component: EditArticlePage,
 })
 
 function EditArticlePage() {
+  
   const { id } = Route.useParams()
 
   const { data, isLoading, isError } = useQuery({
@@ -27,9 +29,11 @@ function EditArticlePage() {
   }
 
   return <EditArticleForm id={id} article={data.item} />
+  
 }
 
 function EditArticleForm({ id, article }: { id: string; article: { title: string; content: string; coverImageUrl: string | null } }) {
+  useDocumentTitle(`Editar: ${article.title} · Artículos`)
   const navigate = useNavigate()
   const queryClient = useQueryClient()
   const [formError, setFormError] = useState<string | null>(null)

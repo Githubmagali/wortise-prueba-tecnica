@@ -4,13 +4,14 @@ import { useState } from 'react'
 import { Button, Card, Input, TextField, Label, FieldError } from '@heroui/react'
 import { forgotPasswordFormSchema } from '@/lib/schemas'
 import { requestPasswordReset } from '@/lib/auth-client'
-
+import { useDocumentTitle } from '@/lib/useDocumentTitle'
 
 export const Route = createFileRoute('/forgot-password')({
   component: ForgotPasswordPage,
 })
 
 function ForgotPasswordPage() {
+  useDocumentTitle('Olvidé mi contraseña · Artículos')
   const [formError, setFormError] = useState<string | null>(null)
   const [sent, setSent] = useState(false)
 

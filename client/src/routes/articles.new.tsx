@@ -5,12 +5,14 @@ import { useState } from 'react'
 import { Button, Card, Input, TextField, Label, FieldError } from '@heroui/react'
 import { articleFormSchema } from '@/lib/schemas'
 import { api, ApiError } from '@/lib/api'
+import { useDocumentTitle } from '@/lib/useDocumentTitle'
 
 export const Route = createFileRoute('/articles/new')({
     component: NewArticlePage,
 })
 
 function NewArticlePage() {
+    useDocumentTitle('Nuevo artículo · Artículos')
     const navigate = useNavigate()
     const queryClient = useQueryClient()
     const [formError, setFormError] = useState<string | null>(null)

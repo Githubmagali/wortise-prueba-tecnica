@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { z } from 'zod'
 import { Button, Card, Input, TextField, Label, FieldError } from '@heroui/react'
 import { resetPassword } from '@/lib/auth-client'
+import { useDocumentTitle } from '@/lib/useDocumentTitle'
 
 const resetPasswordSearchSchema = z.object({
   token: z.string().catch(''),
@@ -19,6 +20,7 @@ export const Route = createFileRoute('/reset-password')({
 })
 
 function ResetPasswordPage() {
+  useDocumentTitle('Restablecer contraseña · Artículos')
   const { token } = Route.useSearch()
   const navigate = useNavigate()
   const [formError, setFormError] = useState<string | null>(null)
@@ -59,7 +61,7 @@ function ResetPasswordPage() {
   }
 
   return (
-    <div className="flex justify-center p-8 pt-28">
+    <div className="flex justify-center p-2 sm:pt-28">
       <Card className="w-full container-3">
         <div className="flex flex-col gap-1.5 pb-0">
           <h2 className="">Elegí una nueva contraseña</h2>

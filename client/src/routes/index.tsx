@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { Input, Chip } from '@heroui/react'
 import { z } from 'zod'
 import { api } from '@/lib/api'
-
+import { useDocumentTitle } from '@/lib/useDocumentTitle'
 
 const searchParamsSchema = z.object({
   q: z.string().catch(''),
@@ -22,6 +22,8 @@ export const Route = createFileRoute('/')({
 })
 
 function HomePage() {
+  useDocumentTitle('Artículos')
+  
   const { q, page } = Route.useSearch()
   const navigate = useNavigate({ from: Route.fullPath })
   const [term, setTerm] = useState(q)

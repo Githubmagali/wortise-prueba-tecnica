@@ -2,7 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
 import { api } from '@/lib/api'
 import { useSession } from '@/lib/auth-client'
-
+import { useDocumentTitle } from '@/lib/useDocumentTitle'
 
 export const Route = createFileRoute('/public/articles/$id')({
   component: PublicArticleDetailPage,
@@ -10,7 +10,6 @@ export const Route = createFileRoute('/public/articles/$id')({
 
 function PublicArticleDetailPage() {
   const { id } = Route.useParams()
-  //Para la sesion
   const { data: session } = useSession()
 
   const { data, isLoading, isError } = useQuery({
@@ -18,6 +17,7 @@ function PublicArticleDetailPage() {
     queryFn: () => api.getPublicArticle(id),
   })
 
+  useDocumentTitle(data?.item.title ? `${data.item.title} · Artículos` : 'Artículos')
   if (isLoading) {
     return <p className="p-8 text-default-500">Cargando artículo...</p>
   }
@@ -27,7 +27,7 @@ function PublicArticleDetailPage() {
   }
 
   const article = data.item
-
+ useDocumentTitle(`${article.title} · Artículos`)
   return (
   <div className="relative p-2 sm:p-8">
   <div className="flex flex-col gap-4 mb-6 lg:mb-0 lg:absolute lg:left-8 lg:top-8">

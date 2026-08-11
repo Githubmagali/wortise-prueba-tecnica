@@ -12,6 +12,7 @@ body,
 
 .logo {
   color: #e6467d;
+  font-size: 25px !important;
 }
 
 .logo:hover, 
@@ -176,13 +177,13 @@ button,
   }
 
   h1 {
-    font-size: 18px;
+    font-size: 21px;
   }
   h2 {
-    font-size: 17px;
+    font-size: 20px;
   }
    h3 {
-    font-size: 16px;
+    font-size: 19px;
   }
 
 }

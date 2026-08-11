@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { Button } from '@heroui/react'
 import { api, ApiError } from '@/lib/api'
+import { useDocumentTitle } from '@/lib/useDocumentTitle'
 
 export const Route = createFileRoute('/articles/$id')({
   component: ArticleDetailPage,
@@ -41,6 +42,8 @@ function ArticleDetailPage() {
   }
 
   const article = data.item
+
+  useDocumentTitle(`${article.title} · Artículos`)
 
 
   return (
