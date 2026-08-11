@@ -23,11 +23,12 @@ export const auth = betterAuth({
     updateAge: 60 * 60 * 24, // se renueva cada 1 día de uso
   },
   advanced: {
-    defaultCookieAttributes: {
-      sameSite: "lax",
-      httpOnly: true,
-    },
+  defaultCookieAttributes: {
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    secure: process.env.NODE_ENV === "production",
+    httpOnly: true,
   },
+},
 });
  
 export type Session = typeof auth.$Infer.Session;

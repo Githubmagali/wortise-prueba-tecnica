@@ -58,11 +58,12 @@ function ResetPasswordPage() {
   }
 
   return (
-    <div className="flex justify-center p-8">
-      <Card className="w-full max-w-sm">
-        <Card.Header>
-          <Card.Title>Elegí una nueva contraseña</Card.Title>
-        </Card.Header>
+    <div className="flex justify-center p-8 pt-28">
+      <Card className="w-full container-3">
+         <div className="flex flex-col gap-1.5 pb-0">
+          <h2 className="">Elegí una nueva contraseña</h2>
+          <p className="text-sm text-default-500">Accedé a tu cuenta para gestionar tus artículos.</p>
+        </div>
         <Card.Content>
           <form
             className="flex flex-col gap-4"
