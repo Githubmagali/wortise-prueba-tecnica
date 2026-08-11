@@ -26,7 +26,7 @@ function RootComponent() {
             <>
              <span className="hidden sm:flex text-sm text-default-500">Hola, {session.user.name}</span>
               <Link to="/articles" search={{ page: 1 }} className="button-3">
-                Mis artículos
+                Mi panel 
               </Link>
 
 

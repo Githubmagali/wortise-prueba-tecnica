@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate,  stripSearchParams } from '@tanstack/react-router'
+import { createFileRoute, Link, useNavigate, stripSearchParams } from '@tanstack/react-router'
 import { Button } from '@heroui/react'
 import { useQuery } from '@tanstack/react-query'
 import { api } from '@/lib/api'
@@ -52,29 +52,29 @@ function MyArticlesPage() {
       <div className="sm:p-8 pt-4 flex flex-col gap-4">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-semibold flex ">Mis <div className="color-2 pl-2">artículos</div></h1>
-          <Link to="/articles/new" className="underline">Nuevo artículo</Link>
+          <Link to="/articles/new" className="link-3 color-3">Nuevo artículo</Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {data.items.map((article) => (
-             <Link
-                key={article.id}
-                to="/public/articles/$id"
-                params={{ id: article.id }}
-                className="border border-default-200 rounded-md overflow-hidden hover:border-default-400 flex flex-col"
-              >
-                {article.coverImageUrl && (
-                  <img
-                    src={article.coverImageUrl}
-                    alt={article.title}
-                    className="w-full h-40 object-cover"
-                  />
-                )}
-                <div className="p-4 flex flex-col gap-1 bg-white">
-                  <h3 className="font-semibold title-1">{article.title}</h3>
-                  <p className="text-sm text-default-500">{article.authorName}</p>
-                  <p className="text-sm text-default-500 pt-2">{article.content}</p>
-                </div>
-              </Link>
+            <Link
+              key={article.id}
+              to="/articles/$id"
+              params={{ id: article.id }}
+              className="border border-default-200 rounded-md overflow-hidden hover:border-default-400 flex flex-col"
+            >
+              {article.coverImageUrl && (
+                <img
+                  src={article.coverImageUrl}
+                  alt={article.title}
+                  className="w-full h-40 object-cover"
+                />
+              )}
+              <div className="p-4 flex flex-col gap-1 bg-white">
+                <h3 className="font-semibold title-1">{article.title}</h3>
+                <p className="text-sm text-default-500">{article.authorName}</p>
+                <p className="text-sm text-default-500 pt-2">{article.content}</p>
+              </div>
+            </Link>
           ))}
         </div>
       </div>

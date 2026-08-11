@@ -14,12 +14,17 @@ body,
   color: #e6467d;
 }
 
-.logo:hover {
+.logo:hover, 
+.color-3:hover {
   color: #cd84b0;
 }
 
 .color-2 {
   color: #cd84b0;
+}
+
+.color-3{
+  color: #e61e62;
 }
 
 input,
@@ -126,13 +131,22 @@ button,
   font-size: 16px;
 }
 
+
+.input-1{
+  width: 100%;
+}
+
 .link-2 {
   font-size: 14px;
   font-weight: 500;
 }
-.input-1{
-  width: 100%;
+
+.link-3 {
+  font-size: 20px;
+  font-weight: 600;
 }
+
+
 
 /* articles.index */
 
