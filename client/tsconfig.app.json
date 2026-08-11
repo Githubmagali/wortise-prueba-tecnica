@@ -9,7 +9,7 @@
     "skipLibCheck": true,
     "strict": true,
 "paths": {
-  "@/*": ["src/*"]
+  "@/*": ["./src/*"]
 },
     /* Bundler mode */
     "moduleResolution": "bundler",
