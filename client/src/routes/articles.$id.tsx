@@ -58,7 +58,10 @@ function ArticleDetailPage() {
 
       <div className="container flex items-center flex-col gap-4">
         {article.coverImageUrl && (
-          <img src={article.coverImageUrl} alt={article.coverImageUrl} className="w-full max-h-96 object-cover rounded-md" />
+          <img src={article.coverImageUrl} 
+          alt={article.coverImageUrl} 
+          loading="lazy"
+          className="w-full max-h-96 object-cover rounded-md" />
         )}
         <h1 className="text-3xl font-semibold">{article.title}</h1>
         <p className="text-sm text-default-500">

@@ -44,7 +44,7 @@ function MyArticlesPage() {
           <p className="text-default-500 text-lg pb-5">Todavía no creaste ningún artículo.</p>
           <Link to="/articles/new" className="button-3 ">Crear mi primer artículo</Link>
         </div>
-        <img src="/img.png" alt="img-article" className="img-articles shrink-0" />
+        <img src="/img.png" alt="img-article" loading="lazy" className="img-articles shrink-0" />
       </div>
     )
   }
@@ -68,6 +68,7 @@ function MyArticlesPage() {
                 <img
                   src={article.coverImageUrl}
                   alt={article.title}
+                  loading="lazy"
                   className="w-full h-40 object-cover"
                 />
               )}

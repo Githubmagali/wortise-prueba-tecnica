@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+ 
+Sitemap: https://wortise-prueba-tecnica.vercel.app/sitemap.xml

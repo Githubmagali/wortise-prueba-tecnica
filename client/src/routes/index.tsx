@@ -121,6 +121,7 @@ function HomePage() {
                   <img
                     src={article.coverImageUrl}
                     alt={article.title}
+                    loading="lazy"
                     className="w-full h-40 object-cover"
                   />
                 )}
