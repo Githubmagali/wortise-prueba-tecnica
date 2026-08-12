@@ -128,7 +128,7 @@ Utilicé **Claude (Anthropic)** durante toda la prueba, principalmente como guí
 ## Adicionales implementados
 
 - Filtros de búsqueda y paginación reflejados en la URL, con valores por defecto ocultos (`stripSearchParams`)
-- Estados de carga, vacío y error en todas las vistas
+- Estados de carga (con `Spinner`), vacío (con ilustración) y error (con ícono y botón de reintentar) especialmente cuidados en todas las vistas
 - Paginación tanto en el listado privado como en la búsqueda pública
 - Diseño responsive (mobile/desktop)
 - Mejoras de accesibilidad: `alt` descriptivo en imágenes, `aria-label` en botones sin texto, `role="dialog"` en el modal de confirmación, `lang="es"` en el documento

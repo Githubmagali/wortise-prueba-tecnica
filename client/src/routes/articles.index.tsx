@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 import { api } from '@/lib/api'
 import { z } from 'zod'
 import { useDocumentTitle } from '@/lib/useDocumentTitle'
+import { AlertCircle } from 'lucide-react'
 
 const defaultSearch = { page: 1 }
 
@@ -24,24 +25,32 @@ function MyArticlesPage() {
   const { page } = Route.useSearch()
   const navigate = useNavigate({ from: Route.fullPath })
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ['my-articles', page],
     queryFn: () => api.listMyArticles(page),
   })
 
   if (isLoading) {
     if (isLoading) {
-  return (
-    <div className="p-8 flex items-center gap-2 text-default-500">
-      <Spinner size="sm" />
-      <span>Cargando tus artículos...</span>
-    </div>
-  )
-}
+      return (
+        <div className="p-8 flex items-center gap-2 text-default-500">
+          <Spinner size="sm" />
+          <span>Cargando tus artículos...</span>
+        </div>
+      )
+    }
   }
 
   if (isError) {
-    return <p className="p-8 text-danger">No se pudieron cargar tus artículos.</p>
+    return (
+      <div className="p-8 flex items-center gap-2 text-danger">
+        <AlertCircle size={18} />
+        <span>No se pudieron cargar tus artículos.</span>
+        <button onClick={() => refetch()} className="underline text-sm">
+          Reintentar
+        </button>
+      </div>
+    )
   }
 
   if (!data || data.items.length === 0) {

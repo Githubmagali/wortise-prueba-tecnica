@@ -1,9 +1,10 @@
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
-import { Button,Spinner } from '@heroui/react'
+import { Button, Spinner } from '@heroui/react'
 import { api, ApiError } from '@/lib/api'
 import { useDocumentTitle } from '@/lib/useDocumentTitle'
+import { AlertCircle } from 'lucide-react'
 
 export const Route = createFileRoute('/articles/$id')({
   component: ArticleDetailPage,
@@ -16,7 +17,7 @@ function ArticleDetailPage() {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false)
   const [deleteError, setDeleteError] = useState<string | null>(null)
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ['my-article', id],
     queryFn: () => api.getMyArticle(id),
   })
@@ -34,16 +35,24 @@ function ArticleDetailPage() {
 
 
   if (isLoading) {
-  return (
-    <div className="p-8 flex items-center gap-2 text-default-500">
-      <Spinner size="sm" />
-      <span>Cargando artículo...</span>
-    </div>
-  )
-}
+    return (
+      <div className="p-8 flex items-center gap-2 text-default-500">
+        <Spinner size="sm" />
+        <span>Cargando artículo...</span>
+      </div>
+    )
+  }
 
   if (isError || !data) {
-    return <p className="p-8 text-danger">No se pudo cargar el artículo.</p>
+    return (
+      <div className="p-8 flex items-center gap-2 text-danger">
+        <AlertCircle size={18} />
+        <span>No se pudo cargar el artículo.</span>
+        <button onClick={() => refetch()} className="underline text-sm">
+          Reintentar
+        </button>
+      </div>
+    )
   }
 
   const article = data.item
@@ -63,10 +72,10 @@ function ArticleDetailPage() {
 
       <div className="container flex items-center flex-col gap-4">
         {article.coverImageUrl && (
-          <img src={article.coverImageUrl} 
-          alt={article.coverImageUrl} 
-          loading="lazy"
-          className="w-full max-h-96 object-cover rounded-md" />
+          <img src={article.coverImageUrl}
+            alt={article.coverImageUrl}
+            loading="lazy"
+            className="w-full max-h-96 object-cover rounded-md" />
         )}
         <h1 className="text-3xl font-semibold">{article.title}</h1>
         <p className="text-sm text-default-500">

@@ -5,6 +5,7 @@ import { Input, Chip, Spinner } from '@heroui/react'
 import { z } from 'zod'
 import { api } from '@/lib/api'
 import { useDocumentTitle } from '@/lib/useDocumentTitle'
+import { AlertCircle } from 'lucide-react'
 
 const searchParamsSchema = z.object({
   q: z.string().catch(''),
@@ -20,6 +21,7 @@ export const Route = createFileRoute('/')({
   },
   component: HomePage,
 })
+
 
 function HomePage() {
   useDocumentTitle('Artículos')
@@ -58,7 +60,15 @@ function HomePage() {
             <span>Cargando autores...</span>
           </div>
         )}
-        {authorsQuery.isError && <p className="text-danger">No se pudieron cargar los autores.</p>}
+        {authorsQuery.isError && (
+          <div className="flex items-center gap-2 text-danger">
+            <AlertCircle size={18} />
+            <span>No se pudieron cargar los autores.</span>
+            <button onClick={() => authorsQuery.refetch()} className="underline text-sm">
+              Reintentar
+            </button>
+          </div>
+        )}
         {authorsQuery.data && authorsQuery.data.items.length === 0 && (
           <p className="text-default-500">Todavía no hay autores registrados.</p>
         )}
@@ -112,11 +122,35 @@ function HomePage() {
             <span>Buscando...</span>
           </div>
         )}
-        {searchQuery.isError && <p className="text-danger">No se pudo realizar la búsqueda.</p>}
+        {searchQuery.isError && (
+          <div className="flex items-center gap-2 text-danger">
+            <AlertCircle size={18} />
+            <span>No se pudo realizar la búsqueda.</span>
+            <button onClick={() => searchQuery.refetch()} className="underline text-sm">
+              Reintentar
+            </button>
+          </div>
+        )}
         {searchQuery.data && searchQuery.data.items.length === 0 && (
-          <p className="text-default-500">
-            {q ? `No encontramos artículos para "${q}".` : 'Todavía no hay artículos publicados.'}
-          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-8 py-8">
+            <div className="text-center sm:text-left">
+              <p className="text-default-500 text-lg pb-2">
+                {q ? `No encontramos artículos para "${q}".` : 'Todavía no hay artículos publicados.'}
+              </p>
+              {q && (
+                <button
+                  onClick={() => {
+                    setTerm('')
+                    navigate({ search: { q: '', page: 1 }, replace: true })
+                  }}
+                  className="text-sm text-default-500"
+                >
+                  Ver todos los artículos
+                </button>
+              )}
+            </div>
+            <img src="/img.png" alt="Sin resultados" className="img-articles shrink-0" />
+          </div>
         )}
         {searchQuery.data && searchQuery.data.items.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
