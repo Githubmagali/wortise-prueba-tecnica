@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate, stripSearchParams } from '@tanstack/react-router'
-import { Button } from '@heroui/react'
+import { Button, Spinner } from '@heroui/react'
 import { useQuery } from '@tanstack/react-query'
 import { api } from '@/lib/api'
 import { z } from 'zod'
@@ -30,7 +30,14 @@ function MyArticlesPage() {
   })
 
   if (isLoading) {
-    return <p className="p-8 text-default-500">Cargando tus artículos...</p>
+    if (isLoading) {
+  return (
+    <div className="p-8 flex items-center gap-2 text-default-500">
+      <Spinner size="sm" />
+      <span>Cargando tus artículos...</span>
+    </div>
+  )
+}
   }
 
   if (isError) {

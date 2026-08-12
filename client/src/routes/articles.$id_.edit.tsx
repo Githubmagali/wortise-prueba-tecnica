@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate, Link } from '@tanstack/react-router'
 import { useForm } from '@tanstack/react-form'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
-import { Button, Card, Input, TextField, Label, FieldError } from '@heroui/react'
+import { Button, Card, Input, TextField, Label, FieldError, Spinner } from '@heroui/react'
 import { articleFormSchema } from '@/lib/schemas'
 import { api, ApiError } from '@/lib/api'
 import { useDocumentTitle } from '@/lib/useDocumentTitle'
@@ -21,7 +21,12 @@ function EditArticlePage() {
   })
 
   if (isLoading) {
-    return <p className="p-8 text-default-500">Cargando artículo...</p>
+    return (
+     <div className="p-8 flex items-center gap-2 text-default-500">
+          <Spinner size="sm" />
+          <span>Cargando artículo...</span>
+        </div>
+    )
   }
 
   if (isError || !data) {

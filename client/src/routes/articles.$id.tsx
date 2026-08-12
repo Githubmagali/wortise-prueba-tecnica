@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
-import { Button } from '@heroui/react'
+import { Button,Spinner } from '@heroui/react'
 import { api, ApiError } from '@/lib/api'
 import { useDocumentTitle } from '@/lib/useDocumentTitle'
 
@@ -34,8 +34,13 @@ function ArticleDetailPage() {
 
 
   if (isLoading) {
-    return <p className="p-8 text-default-500">Cargando artículo...</p>
-  }
+  return (
+    <div className="p-8 flex items-center gap-2 text-default-500">
+      <Spinner size="sm" />
+      <span>Cargando artículo...</span>
+    </div>
+  )
+}
 
   if (isError || !data) {
     return <p className="p-8 text-danger">No se pudo cargar el artículo.</p>

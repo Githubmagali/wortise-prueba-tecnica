@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate, stripSearchParams } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
-import { Input, Chip } from '@heroui/react'
+import { Input, Chip, Spinner } from '@heroui/react'
 import { z } from 'zod'
 import { api } from '@/lib/api'
 import { useDocumentTitle } from '@/lib/useDocumentTitle'
@@ -23,7 +23,7 @@ export const Route = createFileRoute('/')({
 
 function HomePage() {
   useDocumentTitle('Artículos')
-  
+
   const { q, page } = Route.useSearch()
   const navigate = useNavigate({ from: Route.fullPath })
   const [term, setTerm] = useState(q)
@@ -52,7 +52,12 @@ function HomePage() {
     <div className="sm:p-8 flex flex-col gap-10">
       <section>
         <h1 className="text-2xl font-semibold mb-4">Autores</h1>
-        {authorsQuery.isLoading && <p className="text-default-500">Cargando autores...</p>}
+        {authorsQuery.isLoading && (
+          <div className="flex items-center gap-2 text-default-500">
+            <Spinner size="sm" />
+            <span>Cargando autores...</span>
+          </div>
+        )}
         {authorsQuery.isError && <p className="text-danger">No se pudieron cargar los autores.</p>}
         {authorsQuery.data && authorsQuery.data.items.length === 0 && (
           <p className="text-default-500">Todavía no hay autores registrados.</p>
@@ -101,7 +106,12 @@ function HomePage() {
           className="max-w-md mb-6 input-2"
         />
 
-        {searchQuery.isLoading && <p className="text-default-500">Buscando...</p>}
+        {searchQuery.isLoading && (
+          <div className="flex items-center gap-2 text-default-500">
+            <Spinner size="sm" />
+            <span>Buscando...</span>
+          </div>
+        )}
         {searchQuery.isError && <p className="text-danger">No se pudo realizar la búsqueda.</p>}
         {searchQuery.data && searchQuery.data.items.length === 0 && (
           <p className="text-default-500">

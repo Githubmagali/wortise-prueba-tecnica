@@ -3,6 +3,8 @@ import { useQuery } from '@tanstack/react-query'
 import { api } from '@/lib/api'
 import { useSession } from '@/lib/auth-client'
 import { useDocumentTitle } from '@/lib/useDocumentTitle'
+import { Spinner } from '@heroui/react'
+
 
 export const Route = createFileRoute('/public/articles/$id')({
   component: PublicArticleDetailPage,
@@ -19,7 +21,10 @@ function PublicArticleDetailPage() {
 
   useDocumentTitle(data?.item.title ? `${data.item.title} · Artículos` : 'Artículos')
   if (isLoading) {
-    return <p className="p-8 text-default-500">Cargando artículo...</p>
+    return  (<div className="p-8 flex items-center gap-2 text-default-500">
+          <Spinner size="sm" />
+          <span>Cargando artículo...</span>
+        </div>)
   }
 
   if (isError || !data) {
