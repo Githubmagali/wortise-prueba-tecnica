@@ -63,6 +63,13 @@ function PublicArticleDetailPage() {
             >
               ← Ver mis artículos y editarlos
             </Link>
+            <Link
+              to="/"
+              search={{ q: article.authorName, page: 1 }}
+              className="text-sm text-default-500 underline w-fit flex items-center gap-2 link"
+            >
+              ← Ver más de {article.authorName}
+            </Link>
           </>
         ) : (
           <>
