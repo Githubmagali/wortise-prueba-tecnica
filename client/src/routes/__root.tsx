@@ -56,7 +56,7 @@ function RootComponent() {
         <Outlet />
       </main>
       <footer className="border-t border-default-200 px-4 sm:px-13 py-4 text-center text-sm text-default-500 flex items-center justify-center">
-        <div>© 2026 Artículos</div>
+        <div>© 2026 Artículos Fernandez Magali Victoria </div>
         <a href="mailto:soporte@impulsanube.com" className='color-2 px-4'>Soporte</a>
       </footer>
     </div>
