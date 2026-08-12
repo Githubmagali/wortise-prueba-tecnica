@@ -122,7 +122,7 @@ function RegisterPage() {
                                             type="button"
                                             onClick={() => setShowPassword(!showPassword)}
                                             aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
-                                            className="absolute right-3 top-1/2 -translate-y-1/2 text-default-500"
+                                            className="absolute right-3 top-1/2 -translate-y-1/2 text-default-500 button-4"
                                         >
                                             {showPassword ? (
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
