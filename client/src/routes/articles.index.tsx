@@ -46,7 +46,7 @@ function MyArticlesPage() {
       <div className="p-8 flex items-center gap-2 text-danger">
         <AlertCircle size={18} />
         <span>No se pudieron cargar tus artículos.</span>
-        <button onClick={() => refetch()} className="underline text-sm">
+        <button onClick={() => refetch()} className="button-error text-sm">
           Reintentar
         </button>
       </div>
@@ -69,7 +69,7 @@ function MyArticlesPage() {
     <>
       <div className="sm:p-8 pt-4 flex flex-col gap-4">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-semibold flex ">Mis <div className="color-2 pl-2">artículos</div></h1>
+          <h1 className="text-2xl font-semibold flex ">Hace click para editar <div className="color-2 pl-2">artículos</div></h1>
           <Link to="/articles/new" className="link-3 color-3">Nuevo artículo</Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

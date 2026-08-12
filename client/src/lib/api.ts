@@ -32,6 +32,7 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
 export interface Article {
   id: string
   title: string
+  slug: string
   content: string
   coverImageUrl: string | null
   authorId: string
@@ -85,5 +86,7 @@ export const api = {
     ),  
   getPublicArticle: (id: string) =>
     request<{ item: Article }>(`/api/public/articles/${id}`),  
+  getPublicArticleBySlug: (authorSlug: string, articleSlug: string) =>
+    request<{ item: Article }>(`/api/public/articles/by-slug/${authorSlug}/${articleSlug}`),
 }
 

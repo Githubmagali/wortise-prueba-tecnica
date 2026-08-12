@@ -3,6 +3,7 @@ import { ObjectId } from "mongodb";
 import { getDb } from "../db.js";
 import { requireAuth } from "../middleware/require-auth.js";
 import { createArticleSchema, paginationSchema, updateArticleSchema } from "../schemas.js";
+import { slugify } from "../lib/slugify.js";
 
 const articles = new Hono();
 
@@ -17,6 +18,7 @@ articles.post("/", async (c) => {
   const db = await getDb();
   const article = {
     title: parsed.data.title,
+    slug: slugify(parsed.data.title),
     content: parsed.data.content,
     coverImageUrl: parsed.data.coverImageUrl ?? null,
     authorId: c.get("user").id,
@@ -139,6 +141,7 @@ function serializeArticle(doc: any) {
   return {
     id: doc._id.toString(),
     title: doc.title,
+    slug: doc.slug,
     content: doc.content,
     coverImageUrl: doc.coverImageUrl,
     authorId: doc.authorId,

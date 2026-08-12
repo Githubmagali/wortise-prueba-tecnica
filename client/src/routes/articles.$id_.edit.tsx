@@ -35,7 +35,7 @@ function EditArticlePage() {
       <div className="p-8 flex items-center gap-2 text-danger">
         <AlertCircle size={18} />
         <span>No se pudo cargar el artículo.</span>
-        <button onClick={() => refetch()} className="underline text-sm">
+        <button onClick={() => refetch()} className="button-error text-sm">
           Reintentar
         </button>
       </div>

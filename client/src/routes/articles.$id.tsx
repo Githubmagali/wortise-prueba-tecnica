@@ -22,6 +22,8 @@ function ArticleDetailPage() {
     queryFn: () => api.getMyArticle(id),
   })
 
+  useDocumentTitle(data?.item.title ? `${data.item.title} · Artículos` : 'Artículos')
+
   const deleteMutation = useMutation({
     mutationFn: () => api.deleteArticle(id),
     onSuccess: () => {
@@ -48,16 +50,14 @@ function ArticleDetailPage() {
       <div className="p-8 flex items-center gap-2 text-danger">
         <AlertCircle size={18} />
         <span>No se pudo cargar el artículo.</span>
-        <button onClick={() => refetch()} className="underline text-sm">
+        <button onClick={() => refetch()} className="button-error text-sm">
           Reintentar
         </button>
       </div>
     )
   }
 
-  const article = data.item
-
-  useDocumentTitle(`${article.title} · Artículos`)
+ const article = data.item
 
 
   return (

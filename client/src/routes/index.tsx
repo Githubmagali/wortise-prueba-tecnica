@@ -6,6 +6,7 @@ import { z } from 'zod'
 import { api } from '@/lib/api'
 import { useDocumentTitle } from '@/lib/useDocumentTitle'
 import { AlertCircle } from 'lucide-react'
+import { slugify } from '@/lib/slugify'
 
 const searchParamsSchema = z.object({
   q: z.string().catch(''),
@@ -64,7 +65,7 @@ function HomePage() {
           <div className="flex items-center gap-2 text-danger">
             <AlertCircle size={18} />
             <span>No se pudieron cargar los autores.</span>
-            <button onClick={() => authorsQuery.refetch()} className="underline text-sm">
+            <button onClick={() => authorsQuery.refetch()} className="button-error text-sm">
               Reintentar
             </button>
           </div>
@@ -126,7 +127,7 @@ function HomePage() {
           <div className="flex items-center gap-2 text-danger">
             <AlertCircle size={18} />
             <span>No se pudo realizar la búsqueda.</span>
-            <button onClick={() => searchQuery.refetch()} className="underline text-sm">
+            <button onClick={() => searchQuery.refetch()} className="button-error text-sm">
               Reintentar
             </button>
           </div>
@@ -157,8 +158,8 @@ function HomePage() {
             {searchQuery.data.items.map((article) => (
               <Link
                 key={article.id}
-                to="/public/articles/$id"
-                params={{ id: article.id }}
+                to="/public/articles/$authorSlug/$articleSlug"
+                params={{ authorSlug: slugify(article.authorName), articleSlug: article.slug }}
                 className="border border-default-200 rounded-md overflow-hidden hover:border-default-400 flex flex-col"
               >
                 {article.coverImageUrl && (

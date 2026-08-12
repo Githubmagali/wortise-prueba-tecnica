@@ -20,6 +20,7 @@ import { Route as ArticlesIdRouteImport } from './routes/articles.$id'
 import { Route as ArticlesNewRouteImport } from './routes/articles.new'
 import { Route as ArticlesIdEditRouteImport } from './routes/articles.$id_.edit'
 import { Route as PublicArticlesIdRouteImport } from './routes/public.articles.$id'
+import { Route as PublicArticlesAuthorSlugArticleSlugRouteImport } from './routes/public.articles.$authorSlug.$articleSlug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -76,6 +77,12 @@ const PublicArticlesIdRoute = PublicArticlesIdRouteImport.update({
   path: '/public/articles/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PublicArticlesAuthorSlugArticleSlugRoute =
+  PublicArticlesAuthorSlugArticleSlugRouteImport.update({
+    id: '/public/articles/$authorSlug/$articleSlug',
+    path: '/public/articles/$authorSlug/$articleSlug',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -89,6 +96,7 @@ export interface FileRoutesByFullPath {
   '/articles/': typeof ArticlesIndexRoute
   '/articles/$id/edit': typeof ArticlesIdEditRoute
   '/public/articles/$id': typeof PublicArticlesIdRoute
+  '/public/articles/$authorSlug/$articleSlug': typeof PublicArticlesAuthorSlugArticleSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -101,6 +109,7 @@ export interface FileRoutesByTo {
   '/articles': typeof ArticlesIndexRoute
   '/articles/$id/edit': typeof ArticlesIdEditRoute
   '/public/articles/$id': typeof PublicArticlesIdRoute
+  '/public/articles/$authorSlug/$articleSlug': typeof PublicArticlesAuthorSlugArticleSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -115,6 +124,7 @@ export interface FileRoutesById {
   '/articles/': typeof ArticlesIndexRoute
   '/articles/$id_/edit': typeof ArticlesIdEditRoute
   '/public/articles/$id': typeof PublicArticlesIdRoute
+  '/public/articles/$authorSlug/$articleSlug': typeof PublicArticlesAuthorSlugArticleSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -130,6 +140,7 @@ export interface FileRouteTypes {
     | '/articles/'
     | '/articles/$id/edit'
     | '/public/articles/$id'
+    | '/public/articles/$authorSlug/$articleSlug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -142,6 +153,7 @@ export interface FileRouteTypes {
     | '/articles'
     | '/articles/$id/edit'
     | '/public/articles/$id'
+    | '/public/articles/$authorSlug/$articleSlug'
   id:
     | '__root__'
     | '/'
@@ -155,6 +167,7 @@ export interface FileRouteTypes {
     | '/articles/'
     | '/articles/$id_/edit'
     | '/public/articles/$id'
+    | '/public/articles/$authorSlug/$articleSlug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -165,6 +178,7 @@ export interface RootRouteChildren {
   RegisterRoute: typeof RegisterRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   PublicArticlesIdRoute: typeof PublicArticlesIdRoute
+  PublicArticlesAuthorSlugArticleSlugRoute: typeof PublicArticlesAuthorSlugArticleSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -246,6 +260,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicArticlesIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/public/articles/$authorSlug/$articleSlug': {
+      id: '/public/articles/$authorSlug/$articleSlug'
+      path: '/public/articles/$authorSlug/$articleSlug'
+      fullPath: '/public/articles/$authorSlug/$articleSlug'
+      preLoaderRoute: typeof PublicArticlesAuthorSlugArticleSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -275,6 +296,8 @@ const rootRouteChildren: RootRouteChildren = {
   RegisterRoute: RegisterRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   PublicArticlesIdRoute: PublicArticlesIdRoute,
+  PublicArticlesAuthorSlugArticleSlugRoute:
+    PublicArticlesAuthorSlugArticleSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

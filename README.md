@@ -137,3 +137,5 @@ Utilicé **Claude (Anthropic)** durante toda la prueba, principalmente como guí
 - Seed de datos para facilitar la revisión (`npm run seed`)
 - Despliegue funcional (Vercel + Render) — links arriba
 - Recuperación de contraseña por email (con [Resend](https://resend.com)), aunque el enunciado aclara que no es un requisito — la agregué como práctica adicional. Para probarla hace falta una `RESEND_API_KEY`; te la comparto por separado (no la subo al repo por ser una credencial real), ya que no es necesaria para el resto de la funcionalidad.
+
+-Los artículos públicos usan una URL con slugs legibles en vez del ObjectId de Mongo (`/public/articles/melisa/quienes-somos` en vez de `/public/articles/6a7c...`). El slug se genera a partir del título al crear el artículo y queda fijo desde ese momento — aunque el título se edite después, la URL no cambia, evitando romper links ya compartidos o indexados por buscadores.

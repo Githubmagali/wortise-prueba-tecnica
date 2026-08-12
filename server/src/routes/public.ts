@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { ObjectId } from "mongodb";
 import { getDb } from "../db.js";
 import { searchSchema } from "../schemas.js";
+import { slugify } from "../lib/slugify.js";
 
 const publicRoutes = new Hono();
 
@@ -62,6 +63,24 @@ publicRoutes.get("/articles/search", async (c) => {
         totalPages: Math.max(1, Math.ceil(total / limit)),
     });
 });
+publicRoutes.get("/articles/by-slug/:authorSlug/:articleSlug", async (c) => {
+  const { authorSlug, articleSlug } = c.req.param();
+  console.log("Buscando →", { authorSlug, articleSlug });
+
+  const db = await getDb();
+  const article = await db.collection("articles").findOne({ slug: articleSlug });
+  console.log("Encontrado en Mongo →", article ? { title: article.title, slug: article.slug, authorName: article.authorName } : null);
+
+  if (!article) {
+    return c.json({ error: "Artículo no encontrado" }, 404);
+  }
+
+  if (slugify(article.authorName) !== authorSlug) {
+    return c.json({ error: "Artículo no encontrado" }, 404);
+  }
+
+  return c.json({ item: serializeArticle(article) });
+});
 
 publicRoutes.get("/articles/:id", async (c) => {
   const id = c.req.param("id");
@@ -83,6 +102,7 @@ function serializeArticle(doc: any) {
   return {
     id: doc._id.toString(),
     title: doc.title,
+    slug: doc.slug,
     content: doc.content,
     coverImageUrl: doc.coverImageUrl,
     authorId: doc.authorId,

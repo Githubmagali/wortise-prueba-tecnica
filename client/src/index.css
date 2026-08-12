@@ -124,7 +124,9 @@ button,
   background: white;
 }
 
-
+.button-error{
+  padding: 4px;
+}
 
 /* Login register */
 
