@@ -68,9 +68,9 @@ function MyArticlesPage() {
   return (
     <>
       <div className="sm:p-8 pt-4 flex flex-col gap-4">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center sm:justify-between flex-col">
           <h1 className="text-2xl font-semibold flex ">Hace click para editar <div className="color-2 pl-2">artículos</div></h1>
-          <Link to="/articles/new" className="link-3 color-3">Nuevo artículo</Link>
+          <Link to="/articles/new" className="link-3 color-3 py-4 sm:py-0">Nuevo artículo</Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {data.items.map((article) => (
