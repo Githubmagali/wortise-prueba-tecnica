@@ -83,7 +83,7 @@ function EditArticleForm({ id, article }: { id: string; article: { title: string
 
   return (
     <>
-      <div className=" sm:p-8 flex justify-center">
+      <div className="container-4 sm:p-8 flex justify-center">
         <div className="w-full max-w-2xl">
           <Link
             to="/articles/$id"

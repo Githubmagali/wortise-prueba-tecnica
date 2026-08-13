@@ -189,3 +189,9 @@ button,
   }
 
 }
+
+@media(max-width: 769px){
+  .container-4{
+    flex-direction: column;
+  }
+}
